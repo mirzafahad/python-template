@@ -1,0 +1,27 @@
+[project]
+name = "python-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+
+
+dependencies = [
+    "pyjokes>=0.8.3",
+]
+
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "mypy>=1.16.1",
+    "pylint>=3.3.7",
+    "pytest-mock>=3.14.1",
+]
+
+
+# Command-line scripts for installations
+[project.scripts]
+# For example:
+# cmdline_tool = "cmdline.tool_cli:main"
+
