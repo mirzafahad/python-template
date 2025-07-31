@@ -289,25 +289,25 @@ Prefer `"""` for multi-line strings rather than `'''`.
 
 ```
 No:
-  long_string = """This is pretty ugly.
+long_string = """This is pretty ugly.
 Don't do this.
 """
 
 Yes:
-  long_string = """This is fine if your use case can accept
-      extraneous leading spaces."""
+long_string = """This is fine if your use case can accept
+    extraneous leading spaces."""
 
 
 Yes:
-  long_string = ("And this too is fine if you cannot accept\n"
-                 "extraneous leading spaces.")
+long_string = ("And this too is fine if you cannot accept\n"
+               "extraneous leading spaces.")
 
 Yes:
-  import textwrap
+import textwrap
 
-  long_string = textwrap.dedent("""\
-      This is also fine, because textwrap.dedent()
-      will collapse common leading spaces in each line.""")
+long_string = textwrap.dedent("""\
+    This is also fine, because textwrap.dedent()
+    will collapse common leading spaces in each line.""")
 ```
 	  
 	  
@@ -332,7 +332,8 @@ with contextlib.closing(urllib.urlopen("http://www.python.org/")) as front_page:
 In rare cases where context-based resource management is infeasible, code documentation must explain clearly how resource lifetime is managed.
 
 
-**19)** **TODO Comments**: 
+**19)** **TODO Comments**:  
+
 Use TODO comments for code that is temporary, a short-term solution, or good-enough but not perfect.
 
 A TODO comment begins with the word TODO in all caps, a following colon, and probably a link to a resource that contains the context, if available. 
@@ -444,7 +445,7 @@ Some don'ts:
 
 - dashes (-) in any package/module name
 
-- __double_leading_and_trailing_underscore__ names (reserved by Python)
+- `__double_leading_and_trailing_underscore__` names (reserved by Python)
 
 - offensive terms
 
@@ -465,7 +466,7 @@ Use CapWords for class names, but lower_with_under.py for module names. Although
 this is now discouraged because it’s confusing when the module happens to be named after a class. (“wait – did I write import StringIO or from StringIO import StringIO?”)
 
 New unit test files follow PEP 8 compliant lower_with_under method names, for example, test_<method_under_test>_<state>. 
-For consistency(\*) with legacy modules that follow CapWords function names, underscores may appear in method names starting with test to separate logical components of the name. 
+For consistency with legacy modules that follow CapWords function names, underscores may appear in method names starting with test to separate logical components of the name. 
 One possible pattern is test<MethodUnderTest>_<state>.
 
 
