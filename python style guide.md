@@ -1,4 +1,4 @@
-1) Never use catch-all "except:" statements, or catch "Exception" or "StandardError", unless you are 
+**1)** Never use catch-all "except:" statements, or catch "Exception" or "StandardError", unless you are 
      *re-raising the exception, or 
 	 *creating an isolation point in the program where exceptions are not propagated but are recorded and suppressed instead, such as protecting a thread from crashing by 
 	  guarding its outermost block.
@@ -47,7 +47,7 @@ No:  def foo(a, b: Mapping = {}):  # Could still get passed to unchecked code.
 ```
 
 
-5) Properties are allowed, but, like operator overloading, should only be used when necessary and match the expectations of typical attribute access; 
+**5)** Properties are allowed, but, like operator overloading, should only be used when necessary and match the expectations of typical attribute access; 
 follow the getters and setters rules otherwise.
 
 For example, using a property to simply both get and set an internal attribute isn’t allowed: there is no computation occurring, so the property is unnecessary 
