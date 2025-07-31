@@ -4,7 +4,7 @@
 	  guarding its outermost block.
 
 
-2) Use default iterators and operators for types that support them, like lists, dictionaries, and files.
+**2)** Use default iterators and operators for types that support them, like lists, dictionaries, and files.
 The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it.
 
 ```
@@ -17,12 +17,12 @@ No:   for key in adict.keys(): ...
       for line in afile.readlines(): ...
 ```
 
-3) Use generators as needed.  Use “Yields:” rather than “Returns:” in the docstring for generator functions.
+**3)** Use generators as needed.  Use “Yields:” rather than “Returns:” in the docstring for generator functions.
 If the generator manages an expensive resource, make sure to force the clean up.
 A good way to do the clean up is by wrapping the generator with a context manager (PEP-0533).
 
 
-4) Do not use mutable objects as default values in the function or method definition.
+**4)** Do not use mutable objects as default values in the function or method definition.
 
 ```
 Yes: def foo(a, b=None):
@@ -58,7 +58,7 @@ Properties should be created with the `@property` decorator. Inheritance with pr
 Do not use properties to implement computations a subclass may ever want to override and extend.
 
 
-6) **True/False Evaluations**:
+**6)** **True/False Evaluations**:
 
 Use the “implicit” false if possible, e.g., `if foo:` rather than `if foo != []:`. There are a few caveats that you should keep in mind though:
 
@@ -96,7 +96,7 @@ No:  if len(users) == 0:
 - Note that Numpy arrays may raise an exception in an implicit boolean context. Prefer the `.size` attribute when testing emptiness of a np.array (e.g. `if not users.size`).
 		
 	
-7. **Lexical Scoping**: Okay to use.
+**7)** **Lexical Scoping**: Okay to use.
 
 A nested Python function can refer to variables defined in enclosing functions, but cannot assign to them. Variable bindings are resolved using lexical scoping, that is, based on the static program text. 
 Any assignment to a name in a block will cause Python to treat all references to that name as a local variable, even if the use precedes the assignment. 
@@ -114,13 +114,13 @@ def get_adder(summand1: float) -> Callable[[float], float]:
 ```
 
 
-8. Use decorators judiciously when there is a clear advantage. Decorators should follow the same import and naming guidelines as functions. Decorator pydoc should clearly state that the function is a decorator. 
+**8)** Use decorators judiciously when there is a clear advantage. Decorators should follow the same import and naming guidelines as functions. Decorator pydoc should clearly state that the function is a decorator. 
 Write unit tests for decorators. Avoid external dependencies in the decorator itself (e.g. don’t rely on files, sockets, database connections, etc.), 
 since they might not be available when the decorator runs (at import time, perhaps from pydoc or other tools). 
 A decorator that is called with valid parameters should (as much as possible) be guaranteed to succeed in all cases.
 
 
-9. **Threading**:
+**9)** **Threading**:
 
 Do not rely on the atomicity of built-in types. While Python’s built-in data types such as dictionaries appear to have atomic operations, there are corner cases where they aren’t atomic 
 (e.g. if `__hash__` or `__eq__` are implemented as Python methods) and their atomicity should not be relied upon. Neither should you rely on atomic variable assignment (since this in turn depends on dictionaries).
@@ -129,25 +129,25 @@ Use the queue module’s Queue data type as the preferred way to communicate dat
 Prefer condition variables and threading.Condition instead of using lower-level locks.
 
 
-10) You can annotate Python code with type hints according to `PEP-484`, and type-check the code at build time with a type checking tool like mypy.
+**10)** You can annotate Python code with type hints according to `PEP-484`, and type-check the code at build time with a type checking tool like mypy.
 Type annotations can be in the source or in a stub pyi file. Whenever possible, annotations should be in the source. Use pyi files for third-party or extension modules.
 
 
-11) It is fine, though not required, to use parentheses around tuples. Do not use them in return statements or conditional statements unless using parentheses for implied line continuation or to indicate a tuple.
+**11)** It is fine, though not required, to use parentheses around tuples. Do not use them in return statements or conditional statements unless using parentheses for implied line continuation or to indicate a tuple.
 
 
-12) Indent your code blocks with `4` spaces.
+**12)** Indent your code blocks with `4` spaces.
 Never use tabs. Implied line continuation should align wrapped elements vertically, or use a hanging 4-space indent. Closing (round, square or curly) brackets can be placed at the end of the expression, 
 or on separate lines, but then should be indented the same as the line with the corresponding opening bracket.
 
 
-13) Python uses docstrings to document code. A docstring is a string that is the first statement in a package, module, class or function. 
+**13)** Python uses docstrings to document code. A docstring is a string that is the first statement in a package, module, class or function. 
 These strings can be extracted automatically through the __doc__ member of the object and are used by pydoc. (Try running pydoc on your module to see how it looks.) 
 Always use the three-double-quote """ format for docstrings (per PEP 257). When writing more (encouraged), this must be followed by a blank line, 
 followed by the rest of the docstring starting at the same cursor position as the first quote of the first line.
 
 
-14) *Classes*:
+**14)** **Classes**:
 
 Classes should have a docstring below the class definition describing the class. 
 Public attributes, excluding properties, should be documented here in an Args section and follow the same formatting as a function’s Args section.
@@ -191,34 +191,34 @@ The class docstring should not repeat unnecessary information, such as that the 
 Yes:
 
 class CheeseShopAddress:
-  """
-  The address of a cheese shop.
+    """
+    The address of a cheese shop.
 
-  ...
-  """
+    ...
+    """
 
 class OutOfCheeseError(Exception):
-  """
-  No more cheese is available.
-  """
+    """
+    No more cheese is available.
+    """
 
 No:
 
 class CheeseShopAddress:
-  """
-  Class that describes the address of a cheese shop.
+    """
+    Class that describes the address of a cheese shop.
 
-  ...
-  """
+    ...
+    """
 
 class OutOfCheeseError(Exception):
-  """
-  Raised when no more cheese is available.
-  """
+    """
+    Raised when no more cheese is available.
+    """
 ```
 
 
-15) **Block and Inline Comments**:
+**15)** **Block and Inline Comments**:
 
 The final place to have comments is in tricky parts of the code. 
 If you’re going to have to explain it at the next code review, you should comment it now. 
@@ -240,7 +240,7 @@ Never describe the code. Assume the person reading the code knows Python (though
 ```
 
 
-16) Pay attention to punctuation, spelling, and grammar; it is easier to read well-written comments than badly written ones.
+**16)** Pay attention to punctuation, spelling, and grammar; it is easier to read well-written comments than badly written ones.
 
 Comments should be as readable as narrative text, with proper capitalization and punctuation. In many cases, complete sentences are more readable than sentence fragments. 
 Shorter comments, such as comments at the end of a line of code, can sometimes be less formal, but you should be consistent with your style.
@@ -250,7 +250,7 @@ it is very important that source code maintain a high level of clarity and reada
 Proper punctuation, spelling, and grammar help with that goal.
 
 
-17) Use an f-string, even when the parameters are all strings. Use your best judgment to decide between string formatting options. A single join with `+` is okay but do not format with `+`.
+**17)** Use an f-string, even when the parameters are all strings. Use your best judgment to decide between string formatting options. A single join with `+` is okay but do not format with `+`.
 
 ```
 Yes: x = f'name: {name}; score: {n}'
@@ -265,16 +265,20 @@ Instead, add each substring to a list and ''.join the list after the loop termin
 These techniques consistently have amortized-linear run-time complexity.
 
 ```
-Yes: items = ['<table>']
-     for last_name, first_name in employee_list:
-         items.append('<tr><td>%s, %s</td></tr>' % (last_name, first_name))
-     items.append('</table>')
-     employee_table = ''.join(items)
+Yes: 
 
-No: employee_table = '<table>'
-    for last_name, first_name in employee_list:
-        employee_table += '<tr><td>%s, %s</td></tr>' % (last_name, first_name)
-    employee_table += '</table>'
+items = ['<table>']
+for last_name, first_name in employee_list:
+    items.append('<tr><td>%s, %s</td></tr>' % (last_name, first_name))
+items.append('</table>')
+employee_table = ''.join(items)
+
+No: 
+
+employee_table = '<table>'
+for last_name, first_name in employee_list:
+    employee_table += '<tr><td>%s, %s</td></tr>' % (last_name, first_name)
+employee_table += '</table>'
 ```
 
 Be consistent with your choice of string quote character within a file. Pick ' or " and stick with it. 
@@ -307,7 +311,7 @@ Yes:
 ```
 	  
 	  
-18) The preferred way to manage files and similar resources is using the with statement:
+**18)** The preferred way to manage files and similar resources is using the with statement:
 
 ```
 with open("hello.txt") as hello_file:
@@ -328,7 +332,7 @@ with contextlib.closing(urllib.urlopen("http://www.python.org/")) as front_page:
 In rare cases where context-based resource management is infeasible, code documentation must explain clearly how resource lifetime is managed.
 
 
-19. **TODO Comments**: 
+**19)** **TODO Comments**: 
 Use TODO comments for code that is temporary, a short-term solution, or good-enough but not perfect.
 
 A TODO comment begins with the word TODO in all caps, a following colon, and probably a link to a resource that contains the context, if available. 
@@ -348,7 +352,7 @@ If your TODO is of the form “At a future date do something” make sure that y
 a very specific event (“Remove this code when all clients can handle XML responses.”) that future code maintainers will comprehend. Issues are ideal for tracking this.
 
 
-20) Imports should be on separate lines; there are exceptions for `typing` and `collections.abc` imports.
+**20)** Imports should be on separate lines; there are exceptions for `typing` and `collections.abc` imports.
 
 E.g.:
 
@@ -404,7 +408,7 @@ from otherproject.ai import soul
 ```
 
 
-21) **Naming**:
+**21)** **Naming**:
 
 - module_name, 
 - package_name, 
@@ -424,7 +428,7 @@ Function names, variable names, and filenames should be descriptive; avoid abbre
 and do not abbreviate by deleting letters within a word.
 
 
-22) **Names to Avoid**:
+**22)** **Names to Avoid**:
 
 Single character names, except for specifically allowed cases:
 
@@ -447,7 +451,7 @@ Some don'ts:
 - names that needlessly include the type of the variable (for example: `id_to_name_dict`)
 
 
-23) **Naming Conventions**:
+**23)** **Naming Conventions**:
 
 Prepending a single underscore ( _ ) has some support for protecting module variables and functions (linters will flag protected member access). 
 Note that it is okay for unit tests to access protected constants from the modules under test.
@@ -465,14 +469,14 @@ For consistency(\*) with legacy modules that follow CapWords function names, und
 One possible pattern is test<MethodUnderTest>_<state>.
 
 
-24) **Mathematical Notation**:
+**24)** **Mathematical Notation**:
 
 For mathematically heavy code, short variable names that would otherwise violate the style guide are preferred when they match established notation in a reference paper or algorithm. 
 When doing so, reference the source of all naming conventions in a comment or docstring or, if the source is not accessible, clearly document the naming conventions. 
 Prefer PEP8-compliant descriptive_names for public APIs, which are much more likely to be encountered out of context.
 
 
-25) **Main**:
+**25)** **Main**:
 
 In Python, pydoc as well as unit tests require modules to be importable. If a file is meant to be used as an executable, its main functionality should be in a `main()` function, 
 and your code should always check `if __name__ == '__main__'` before executing your main program, so that it is not executed when the module is imported.
@@ -488,7 +492,7 @@ if __name__ == '__main__':
 ```
 
 
-26) **Function length**:
+**26)** **Function length**:
 
 Prefer small and focused functions. Long functions are sometimes appropriate, so no hard limit on function length. If a function exceeds about 40 lines, 
 think about whether it can be broken up without harming the structure of the program.
@@ -500,7 +504,7 @@ You could find long and complicated functions when working with some code. Do no
 you find that errors are hard to debug, or you want to use a piece of it in several different contexts, consider breaking up the function into smaller and more manageable pieces.
 
 
-27) **Type Annotations**:
+**27)** **Type Annotations**:
 
 Familiarize yourself with PEP-484. Annotating `self` or `cls` is generally not necessary. Self can be used if it is necessary for proper type information, e.g.
 
@@ -522,7 +526,7 @@ Annotate code that is hard to understand.
 Annotate code as it becomes stable from a types perspective. In many cases, you can annotate all the functions in mature code without losing too much flexibility.
 
 
-28) **Forward Declarations**:
+**28)** **Forward Declarations**:
 
 If you need to use a class name (from the same module) that is not yet defined – for example, if you need the class name inside the declaration of that class, 
 or if you use a class that is defined later in the code, use a string for the class name.
@@ -537,7 +541,7 @@ class OtherClass:
 ```
 
 
-29) **NoneType**:
+**29)** **NoneType**:
 
 In the Python type system, NoneType is a “first class” type, and for typing purposes, None is an alias for NoneType. If an argument can be None, it has to be declared! 
 Use `|` union type expressions.
@@ -559,7 +563,7 @@ def implicit_optional(a: str = None) -> str:
 ```
 
 
-30) **Type Aliases**:
+**30)** **Type Aliases**:
 
 You can declare aliases of complex types. The name of an alias should be CapWorded. If the alias is used only in this module, it should be _Private.
 
@@ -574,7 +578,7 @@ ComplexTFMap: TypeAlias = Mapping[str, _LossAndGradient]
 ```
 
 
-31) **Typing Variables**:
+**31)** **Typing Variables**:
 
 Annotated Assignments
 If an internal variable has a type that is hard or impossible to infer, specify its type with an annotated assignment - use a colon and type between the variable name and value 
@@ -591,7 +595,7 @@ a = SomeUndecoratedFunction()  # type: Foo
 ```
 
 
-32) **Tuples vs Lists**:
+**32)** **Tuples vs Lists**:
 
 Typed lists can only contain objects of a single type. Typed tuples can either have a single repeated type or a set number of elements with different types. 
 The latter is commonly used as the return type from a function.
@@ -603,7 +607,7 @@ c: tuple[int, str, float] = (1, "2", 3.5)
 ```
 
 
-33) **String types**:
+**33)** **String types**:
 
 Use str for string/text data. For code that deals with binary data, use bytes.
 
