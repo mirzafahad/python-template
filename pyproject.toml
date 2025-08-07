@@ -21,7 +21,17 @@ dev = [
 
 
 # Command-line scripts for installations
-[project.scripts]
+#[project.scripts]
 # For example:
 # cmdline_tool = "cmdline.tool_cli:main"
 
+# Build a big ol' dist with hatch
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/python_template"]
+
+[tool.black]
+line-length = 100
